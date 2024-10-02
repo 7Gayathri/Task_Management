@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="ISO-8859-1">
+	<title>Task Management System</title>
+
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+		integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+</head>
+
+<body>
+
+	<div class="container-fluid my-2">
+		<div class="d-flex justify-content-between">
+			<h1 class="text-info  mb-4">Tasks List</h1>
+		
+			<a th:href="@{/}" class=""> LOGOUT </a>
+		</div>
+		<p>username</p>
+
+		
+
+		<table border="1" class="table table-striped table-hover table-responsive-md ">
+			<thead>
+				<tr>
+					
+					<th>Task Name</th>
+					<th>Task Description</th>
+					<th>Status</th>
+					<th>Task Assignee</th>
+					<th>Task Reporting</th>
+					<th>Task Estimate Time</th>
+					<th>Task Spent Time</th>
+					<th>Task Date</th>
+					<th> Actions </th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="tasks : ${listTasks}">
+					
+					<td th:text="${tasks.name}"></td>
+					<td th:text="${tasks.description}"></td>
+					<td th:text="${tasks.status}"></td>
+					<td th:text="${tasks.assignee}"></td>
+					<td th:text="${tasks.reporting}"></td>
+					<td th:text="${tasks.estimatetime}"></td>
+					<td th:text="${tasks.spenttime}"></td>
+					<td th:text="${tasks.tdate}"></td>
+					<td> <a th:href="@{/showFormForUpdate/{id}(id=${tasks.id})}" class="btn btn-success">Update</a>
+						<a th:href="@{/deleteTasks/{id}(id=${tasks.id})}" class="btn btn-danger">Delete</a>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+		<a th:href="@{/showNewTasksForm}" class="btn btn-outline-primary mt-4"> Add Task </a>
+	</div>
+</body>
+
+</html>

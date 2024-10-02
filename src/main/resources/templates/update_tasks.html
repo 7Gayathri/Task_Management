@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="ISO-8859-1">
+	<title>Task Management System</title>
+
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+		integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+</head>
+
+<body>
+	<div class="container">
+		<h1 class="text-center text-info">Task Management System</h1>
+		<hr>
+		<h3 class="text-info">Update Tasks</h3>
+
+		<form action="#" th:action="@{/saveTasks}" th:object="${Task}" method="POST" class="g-3 mt-4">
+			<input type="hidden" th:field="*{id}" />
+			<!-- Add hidden form field to handle update -->
+			
+			<div class="row">
+				
+				<input type="text" th:field="*{name}" placeholder="Task Name" class="form-control text-secondary mb-4 mr-1 col-4">
+
+				<input type="text" th:field="*{description}" placeholder="Task Description" class="form-control text-secondary mb-4  mr-1  col-4">
+
+				<input type="text" th:field="*{status}" placeholder="Task Status" class="form-control text-secondary mb-4  mr-1 col-4">
+
+				<input type="text" th:field="*{assignee}" placeholder="Task assignee" class="form-control text-secondary mb-4  mr-1 col-4">
+
+				<input type="text" th:field="*{reporting}" placeholder="Task reporting" class="form-control text-secondary mb-4  mr-1 col-4">
+
+				<input type="text" th:field="*{estimatetime}" placeholder="Task estimatetime" class="form-control text-secondary mb-4  mr-1 col-4">
+
+				<input type="text" th:field="*{spenttime}" placeholder="Task spenttime" class="form-control text-secondary mb-4  mr-1 col-4">
+
+				<input type="text" th:field="*{tdate}" placeholder="Task tdate" class="form-control text-secondary mb-4  mr-1  col-4">
+
+			</div>
+			<button type="submit" class="btn btn-info col-2"> Update Tasks</button>
+		</form>
+
+		<hr>
+
+		<a th:href="@{/index}"> Back to Task List</a>
+	</div>
+</body>
+
+</html>
