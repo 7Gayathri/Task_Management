@@ -1,6 +1,8 @@
 package com.example.task.contoller;
 
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -8,9 +10,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.SessionAttribute;
 
 import com.example.task.model.Tasks;
 import com.example.task.model.UserDto;
+import com.example.task.model.Users;
 import com.example.task.service.TasksService;
 
 
@@ -25,12 +29,15 @@ public class TaskController {
 		model.addAttribute("user",userDto);
 		return "login";
 	}
-
-	 @GetMapping("/index")
-	    public String viewHomePage(Model model) {
-	        model.addAttribute("listTasks", tasksService.getAllTasks());
-	        return "index";
+	@GetMapping("/index")
+	public String viewHomePage(Model model, @SessionAttribute("loggedInUser") Users loggedInUser) {
+	    if (!model.containsAttribute("listTasks")) {
+	        List<Tasks> tasks = tasksService.getAllTasks(); // Fetch tasks if not available
+	        model.addAttribute("listTasks", tasks); // Add tasks to the model
 	    }
+	    model.addAttribute("loggedInUser", loggedInUser); // Add logged-in user to model
+	    return "index"; // Return the index template
+	}
 
 	    @GetMapping("/showNewTasksForm")
 	    public String showNewUsersForm(Model model) {

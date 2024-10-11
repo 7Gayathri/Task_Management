@@ -7,25 +7,50 @@
 
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
 		integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+	<script src="https://kit.fontawesome.com/65b0cd8812.js" crossorigin="anonymous"></script>
+	<style>
+		button,
+		.log {
+			width: min-content;
+		}
 
+		.log {
+			padding: 0%;
+			margin-bottom: 0%;
+		}
+
+		td {
+			font-size: small;
+		}
+
+		abbr:hover {
+			cursor: pointer;
+		}
+		.emm{
+			color: rgb(181, 71, 184);
+		}
+	</style>
 </head>
 
 <body>
 
 	<div class="container-fluid my-2">
 		<div class="d-flex justify-content-between">
-			<h1 class="text-info  mb-4">Tasks List</h1>
-		
-			<a th:href="@{/}" class=""> LOGOUT </a>
+			<h1 class="text-info ">Tasks List</h1>
+			<a th:href="@{/}">
+				<abbr title="Logout"><i class="fa-solid fa-right-from-bracket fa-lg" style="color: #1ddfed;"></i></abbr>
+			</a>
+
 		</div>
-		<p>username</p>
-
-		
-
+		<div class="d-flex justify-content-end emm">
+		    <p th:if="${loggedInUser != null}">
+		        Welcome, <em th:text="${loggedInUser.name}"></em>
+		    </p>
+		</div>
 		<table border="1" class="table table-striped table-hover table-responsive-md ">
 			<thead>
 				<tr>
-					
+
 					<th>Task Name</th>
 					<th>Task Description</th>
 					<th>Status</th>
@@ -39,7 +64,7 @@
 			</thead>
 			<tbody>
 				<tr th:each="tasks : ${listTasks}">
-					
+
 					<td th:text="${tasks.name}"></td>
 					<td th:text="${tasks.description}"></td>
 					<td th:text="${tasks.status}"></td>
@@ -48,8 +73,16 @@
 					<td th:text="${tasks.estimatetime}"></td>
 					<td th:text="${tasks.spenttime}"></td>
 					<td th:text="${tasks.tdate}"></td>
-					<td> <a th:href="@{/showFormForUpdate/{id}(id=${tasks.id})}" class="btn btn-success">Update</a>
-						<a th:href="@{/deleteTasks/{id}(id=${tasks.id})}" class="btn btn-danger">Delete</a>
+					<td>
+						<abbr title="Edit"><a th:href="@{/showFormForUpdate/{id}(id=${tasks.id})}"
+								class="btn btn-outline-success">
+								<i class="fa-solid fa-square-pen" style="color: rgb(32, 198, 49);"></i>
+							</a></abbr>
+
+						<abbr title="Delete">
+							<a th:href="@{/deleteTasks/{id}(id=${tasks.id})}" class="btn btn-outline-danger">
+								<i class="fa-solid fa-trash-can fa-flip-horizontal" style="color: rgb(255, 0, 0);"></i>
+							</a></abbr>
 					</td>
 				</tr>
 			</tbody>
